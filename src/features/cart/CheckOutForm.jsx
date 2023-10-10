@@ -5,10 +5,12 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
@@ -58,10 +60,10 @@ export default function CheckoutForm() {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      // confirmParams: {
-      //   // Make sure to change this to your payment completion page
-      //   return_url: `${window.location.origin}/completion`,
-      // },
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        return_url: `${window.location.origin}/stripe-redirect`,
+      },
     });
 
     // This point will only be reached if there is an immediate error when
@@ -77,8 +79,6 @@ export default function CheckoutForm() {
 
     setIsLoading(false);
   };
-
-  window.location.href = `${window.location.origin}/completion`;
 
   const paymentElementOptions = {
     layout: "tabs",
