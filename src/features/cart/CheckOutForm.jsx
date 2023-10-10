@@ -58,10 +58,10 @@ export default function CheckoutForm() {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${window.location.origin}/completion/`,
-      },
+      // confirmParams: {
+      //   // Make sure to change this to your payment completion page
+      //   return_url: `${window.location.origin}/completion`,
+      // },
     });
 
     // This point will only be reached if there is an immediate error when
@@ -77,6 +77,8 @@ export default function CheckoutForm() {
 
     setIsLoading(false);
   };
+
+  window.location.href = `${window.location.origin}/completion`;
 
   const paymentElementOptions = {
     layout: "tabs",
