@@ -5,12 +5,11 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
@@ -86,10 +85,10 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement
+      {/* <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
-      />
+      /> */}
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <div>
         <button
@@ -105,6 +104,7 @@ export default function CheckoutForm() {
             )}
           </span>
         </button>
+        <Link to="../checkout">Back to cart</Link>
       </div>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}

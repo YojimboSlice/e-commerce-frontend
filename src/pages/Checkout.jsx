@@ -1,14 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
 import { Input, Select, Option, Button } from "@material-tailwind/react";
-// import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { setShippingData } from "../features/cart/cartSlice";
 import { getShipment } from "../services/apiShipping";
 import CheckoutCart from "../features/cart/CheckoutCart";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getSalesTax } from "../services/apiSalesTax";
-import Payment from "../features/cart/Payment";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -92,8 +89,6 @@ function Checkout() {
       console.error("Uh oh:", error);
     }
   };
-
-  console.log(taxes);
 
   const totalTax = taxes.tax?.amount_to_collect;
   const taxRate = taxes.tax?.rate;

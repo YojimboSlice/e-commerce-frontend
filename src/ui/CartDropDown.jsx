@@ -38,8 +38,6 @@ export default function CartDropDown() {
     dispatch(toggleCart(false));
   }
 
-  console.log(isCartOpen);
-
   return (
     <Transition.Root show={isCartOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeCart}>

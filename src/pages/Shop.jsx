@@ -8,13 +8,12 @@ const Shop = () => {
       <ShopOperations
         options={[
           { value: "all", label: "All", id: 1 },
-          { value: "best-sellers", label: "Best Sellers", id: 2 },
-          { value: "men", label: "Men", id: 3 },
-          { value: "women", label: "Women", id: 4 },
-          { value: "on-sale", label: "On Sale" },
+          { value: "men", label: "Men", id: 2 },
+          { value: "women", label: "Women", id: 3 },
+          { value: "on-sale", label: "On Sale", id: 4 },
           { value: "flame-resistant", label: "Flame Resistant", id: 5 },
           { value: "pants", label: "Pants", id: 6 },
-          { value: "Shirt", label: "shirts", id: 7 },
+          { value: "shirt", label: "Shirts", id: 7 },
           { value: "hi-vis", label: "Hi-Vis", id: 8 },
         ]}
       />

@@ -1,7 +1,7 @@
 import { Button, Chip, Option, Select } from "@material-tailwind/react";
 import Filter from "../../ui/Filter";
 import { useForm, Controller } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const ShopOperations = ({ options }) => {
@@ -10,9 +10,6 @@ const ShopOperations = ({ options }) => {
   const [searchParams, setSearchparams] = useSearchParams();
 
   const selectedFilter = watch("filter");
-
-  const filter = searchParams.get(options.id);
-  console.log(filter);
 
   function onSubmit(data) {
     if (!selectedFilters.includes(selectedFilter)) {
@@ -26,13 +23,16 @@ const ShopOperations = ({ options }) => {
 
       setSearchparams(searchParams);
     }
-    console.log(searchParams);
   }
 
   function handleClose(filter) {
     setSelectedFilters(
       selectedFilters.filter((selectedFilter) => selectedFilter !== filter),
     );
+    const selectedOption = options.find((option) => option.value === filter);
+
+    searchParams.delete(`filter${selectedOption.id}`);
+    setSearchparams(searchParams);
   }
 
   return (

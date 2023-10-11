@@ -23,15 +23,27 @@ function ShopProductTable() {
     return <div>Product not found.</div>;
   }
 
-  const filterValue = searchParams.get("filter" || "all");
+  let filterValue;
+
+  const filterNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  let filteredProducts = products.slice().sort((a, b) => a.id - b.id);
+
+  for (const number of filterNumbers) {
+    const paramKey = `filter${number}`;
+    if (searchParams.has(paramKey)) {
+      filterValue = searchParams.get(paramKey);
+      filteredProducts = filteredProducts.filter((product) =>
+        product.categories.includes(filterValue),
+      );
+    }
+  }
 
   console.log(filterValue);
 
-  const sortedProducts = products.slice().sort((a, b) => a.id - b.id);
-
   return (
     <div className="container mx-auto grid-cols-1 grid md:grid-cols-3 lg:grid-cols-4 gap-6 bg-white">
-      {sortedProducts.map((product) => (
+      {filteredProducts.map((product) => (
         <ShopProductCard product={product} key={product.id} />
       ))}
       <CartDropDown isCartOpen={isCartOpen} />

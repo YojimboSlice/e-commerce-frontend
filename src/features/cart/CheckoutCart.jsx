@@ -7,8 +7,6 @@ import {
   setFinalTotal,
 } from "./cartSlice";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import CheckoutForm from "./CheckOutForm";
 
 const CheckoutCart = ({
   shippingPrice,
