@@ -7,6 +7,7 @@ import {
   setFinalTotal,
 } from "./cartSlice";
 import { Link } from "react-router-dom";
+import { salesTax } from "../../utils/temporarySalesTax";
 
 const CheckoutCart = ({
   shippingPrice,
@@ -37,7 +38,9 @@ const CheckoutCart = ({
     dispatch(removeItemFromCart(itemId));
   }
 
-  const finalTotal = (subtotal + shippingPrice + subtotal * taxRate).toFixed(2);
+  const taxAmount = salesTax * subtotal;
+
+  const finalTotal = (subtotal + shippingPrice + taxAmount).toFixed(2);
 
   function handleConfirmOrder() {
     dispatch(setFinalTotal(finalTotal));
@@ -134,11 +137,12 @@ const CheckoutCart = ({
               <span className="flex justify-between">
                 <p>Taxes</p>{" "}
                 <p>
-                  {taxRate ? (
+                  {/* {taxRate ? (
                     parseFloat(subtotal * taxRate).toFixed(2)
                   ) : (
                     <span>Shipping required</span>
-                  )}
+                  )} */}
+                  {taxAmount.toFixed(2)}
                 </p>
               </span>
               <div className="border-b border-blue-gray-200 mx-8"></div>
